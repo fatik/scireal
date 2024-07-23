@@ -6,14 +6,21 @@
     <title>{{ site.title }}</title>
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
+        :root {
+            --primary-color: #007bff;
+            --text-color: #333;
+            --text-muted: #6c757d;
+            --bg-color: #f8f9fa;
+            --border-color: #dee2e6;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: var(--bg-color);
         }
         header {
             display: flex;
@@ -26,7 +33,7 @@
             gap: 20px;
         }
         nav a {
-            color: #6c757d;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9em;
         }
@@ -48,17 +55,22 @@
         }
         .profile-info p {
             margin: 5px 0;
-            color: #6c757d;
         }
         .pronunciation {
             font-size: 0.7em;
-            color: #6c757d;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+        .previous {
+            color: var(--text-muted);
         }
         .section {
+            margin-bottom: 30px;
+        }
+        .section-box {
             background-color: white;
             border-radius: 8px;
             padding: 30px;
-            margin-bottom: 30px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         h2 {
@@ -71,9 +83,12 @@
         }
         .google-scholar {
             font-size: 0.7em;
-            color: #007bff;
+            background-color: #e9ecef;
+            color: var(--primary-color);
             text-decoration: none;
-            display: flex;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-flex;
             align-items: center;
             gap: 5px;
         }
@@ -85,14 +100,15 @@
         }
         .tag {
             background-color: #e9ecef;
-            color: #495057;
+            color: var(--text-color);
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9em;
             cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .tag.active {
-            background-color: #007bff;
+        .tag:hover, .tag.active {
+            background-color: var(--primary-color);
             color: white;
         }
         .publications {
@@ -101,7 +117,7 @@
             gap: 30px;
         }
         .publication {
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -115,24 +131,41 @@
         }
         .publication h3 {
             font-size: 1.2em;
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
         }
         .publication p {
             font-size: 0.9em;
-            color: #6c757d;
+            color: var(--text-muted);
             margin-bottom: 15px;
         }
         .publication-links {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
         .publication-links a {
-            color: #007bff;
+            color: var(--primary-color);
             text-decoration: none;
             font-size: 0.9em;
+            padding: 5px 10px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .publication-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+            }
+            .profile img {
+                width: 120px;
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -158,7 +191,7 @@
             <h1>{{ site.title }} <span class="pronunciation">({{ site.pronunciation }})</span></h1>
             <p>{{ site.position }}</p>
             <p>{{ site.affiliation }}</p>
-            <p>Previously</p>
+            <p class="previous">Previously</p>
             <p>{{ site.previous_position }}</p>
             <p>{{ site.thesis_link }}</p>
         </div>
@@ -169,7 +202,7 @@
         {{ site.vision | markdownify }}
     </section>
 
-    <section class="section">
+    <section class="section section-box">
         <h2>
             Research & Publications
             <a href="{{ site.google_scholar }}" class="google-scholar">
@@ -186,7 +219,7 @@
                 <div class="publication" data-tags="{{ pub.tags | join: ',' }}">
                     <img src="{{ pub.image }}" alt="{{ pub.title }}">
                     <div class="publication-content">
-                        <h3>{{ pub.title }}</h3>
+                        <h3>{{ forloop.index }}. {{ pub.title }}</h3>
                         <p>{{ pub.description }}</p>
                         <div class="publication-links">
                             {% if pub.paper %}<a href="{{ pub.paper }}"><i data-feather="file-text"></i> Paper</a>{% endif %}
