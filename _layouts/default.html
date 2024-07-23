@@ -65,8 +65,8 @@
         }
         .previous {
             color: var(--text-muted);
-            margin-top: 18px;
-            margin-bottom: -12px;
+            margin-top: 12px;
+            margin-bottom: -2px;
         }
         .section {
             margin-bottom: 30px;
@@ -84,6 +84,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .icon{
+            height: 18px;
         }
         .google-scholar {
             font-size: 0.5em;
@@ -227,9 +231,9 @@
                         <h3>{{ forloop.index }}. {{ pub.title }}</h3>
                         <p>{{ pub.description }}</p>
                         <div class="publication-links">
-                            {% if pub.paper %}<a href="{{ pub.paper }}"><i data-feather="file-text"></i> Paper</a>{% endif %}
-                            {% if pub.video %}<a href="{{ pub.video }}"><i data-feather="video"></i> Video</a>{% endif %}
-                            {% if pub.project %}<a href="{{ pub.project }}"><i data-feather="code"></i> Project</a>{% endif %}
+                            {% if pub.paper %}<a href="{{ pub.paper }}"><i data-feather="file-text" class="icon"></i> Paper</a>{% endif %}
+                            {% if pub.video %}<a href="{{ pub.video }}"><i data-feather="video" class="icon"></i> Video</a>{% endif %}
+                            {% if pub.project %}<a href="{{ pub.project }}"><i data-feather="code" class="icon"></i> Project</a>{% endif %}
                         </div>
                     </div>
                 </div>
