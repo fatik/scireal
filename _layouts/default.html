@@ -4,61 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }}</title>
+    <script src="https://unpkg.com/feather-icons"></script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f8f9fa;
         }
         header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 40px;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .profile {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-info h1 {
+            font-size: 2.2em;
+            margin: 0 0 10px 0;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            color: #6c757d;
+        }
+        .pronunciation {
+            font-size: 0.7em;
+            color: #6c757d;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         h2 {
             font-size: 1.8em;
-            border-bottom: 1px solid #eaecef;
-            padding-bottom: 0.3em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        a {
-            color: #0366d6;
+        .google-scholar {
+            font-size: 0.7em;
+            color: #007bff;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        #connect a {
-            margin-right: 10px;
-        }
-        #publications article {
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        #publications h3 {
-            margin-bottom: 5px;
+        .tag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
         }
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
+        .tag.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .publications {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .publication {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .publication img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .publication-content {
+            padding: 20px;
+        }
+        .publication h3 {
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+        }
+        .publication p {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .publication-links {
+            display: flex;
+            gap: 15px;
+        }
+        .publication-links a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
 <body>
-    {{ content }}
+    <header>
+        <nav>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <a href="#">Link 4</a>
+        </nav>
+        <nav>
+            <a href="#"><i data-feather="twitter"></i></a>
+            <a href="#"><i data-feather="linkedin"></i></a>
+            <a href="#"><i data-feather="github"></i></a>
+            <a href="#"><i data-feather="mail"></i></a>
+        </nav>
+    </header>
+
+    <section class="profile">
+        <img src="{{ site.profile_image }}" alt="{{ site.title }}">
+        <div class="profile-info">
+            <h1>{{ site.title }} <span class="pronunciation">({{ site.pronunciation }})</span></h1>
+            <p>{{ site.position }}</p>
+            <p>{{ site.affiliation }}</p>
+            <p>Previously</p>
+            <p>{{ site.previous_position }}</p>
+            <p>{{ site.thesis_link }}</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>My Vision</h2>
+        {{ site.vision | markdownify }}
+    </section>
+
+    <section class="section">
+        <h2>
+            Research & Publications
+            <a href="{{ site.google_scholar }}" class="google-scholar">
+                <i data-feather="external-link"></i> Google scholar link
+            </a>
+        </h2>
+        <div class="tags">
+            {% for tag in site.publication_tags %}
+                <span class="tag" data-tag="{{ tag }}">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        <div class="publications">
+            {% for pub in site.publications %}
+                <div class="publication" data-tags="{{ pub.tags | join: ',' }}">
+                    <img src="{{ pub.image }}" alt="{{ pub.title }}">
+                    <div class="publication-content">
+                        <h3>{{ pub.title }}</h3>
+                        <p>{{ pub.description }}</p>
+                        <div class="publication-links">
+                            {% if pub.paper %}<a href="{{ pub.paper }}"><i data-feather="file-text"></i> Paper</a>{% endif %}
+                            {% if pub.video %}<a href="{{ pub.video }}"><i data-feather="video"></i> Video</a>{% endif %}
+                            {% if pub.project %}<a href="{{ pub.project }}"><i data-feather="code"></i> Project</a>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <script>
+        feather.replace();
+
+        const tags = document.querySelectorAll('.tag');
+        const publications = document.querySelectorAll('.publication');
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tag.classList.toggle('active');
+                filterPublications();
+            });
+        });
+
+        function filterPublications() {
+            const activeTags = Array.from(tags).filter(tag => tag.classList.contains('active')).map(tag => tag.dataset.tag);
+
+            publications.forEach(pub => {
+                const pubTags = pub.dataset.tags.split(',');
+                if (activeTags.length === 0 || activeTags.some(tag => pubTags.includes(tag))) {
+                    pub.style.display = '';
+                } else {
+                    pub.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

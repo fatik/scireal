@@ -1,2 +1,38 @@
-title: Fatik Owais
-description: Human Centered Design
+title: Researcher's Name
+pronunciation: pronounced name
+position: Associate Professor at University of Chicago (since 2019)
+affiliation: Lead of the Human Computer Integration Lab in the Department of Computer Science
+previous_position: PhD student with Prof. Patrick Baudisch at Hasso Plattner Institute
+thesis_link: You can read my PhD thesis here (Best Dissertation Award, University of Potsdam.)
+profile_image: /path/to/profile-image.jpg
+vision: |
+  In my lab, we engineer interactive devices that integrate directly with the user's
+  body. These devices are the natural succession to wearable interfaces and are
+  designed to investigate how interfaces will connect to our body in a more
+  direct and personal way. Previously, in my PhD (thesis), I explored a subset of
+  this concept: interactive devices that interface directly with the user's muscles.
+  These devices actuate the user's body by means of computer-controlled
+  electrical muscle stimulation (EMS), enabling touch/forces in VR or haptic
+  training without the weight and bulkiness of conventional robotic exoskeletons.
+  These devices gain their advantages, not by adding more technology to the
+  body, but from borrowing parts of the user's body as input/output hardware,
+  resulting in devices that are not only exceptionally small, but that also
+  implement a novel interaction model, in which devices integrate directly with
+  the user's body. Recently, we were able to generalize this concept to new
+  modalities, including novel ways to interface with a user's sense of
+  temperature, smell and rich-touch sensations.
+google_scholar: https://scholar.google.com/citations?user=your-id
+publication_tags:
+  - HCI
+  - HMI
+  - Neuro
+  - HCD
+publications:
+  - title: Interactive Benefits from Switching Electrical to Magnetic Muscle Stimulation
+    description: In my lab, we engineer interactive devices that integrate directly with the user's body. These devices are the natural succession to wearable interfaces and are designed to investigate how interfaces will connect to our body in a more direct and personal way.
+    image: /path/to/publication-image.jpg
+    tags: [HCI, HMI]
+    paper: /path/to/paper.pdf
+    video: https://youtube.com/watch?v=video-id
+    project: /path/to/project
+  # Add more publications as needed
