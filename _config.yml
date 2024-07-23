@@ -30,9 +30,18 @@ publication_tags:
 publications:
   - title: Interactive Benefits from Switching Electrical to Magnetic Muscle Stimulation
     description: In my lab, we engineer interactive devices that integrate directly with the user's body. These devices are the natural succession to wearable interfaces and are designed to investigate how interfaces will connect to our body in a more direct and personal way.
-    image: /path/to/publication-image.jpg
+    image: https://plopes.org/project-thumbnails/UIST2023-MMS.jpg
     tags: [HCI, HMI]
     paper: /path/to/paper.pdf
     video: https://youtube.com/watch?v=video-id
     project: /path/to/project
   # Add more publications as needed
+
+  publications:
+  - title: Interactive Benefits from Switching Electrical to Magnetic Muscle Stimulation
+    description: In my lab, we engineer interactive devices that integrate directly with the user's body. These devices are the natural succession to wearable interfaces and are designed to investigate how interfaces will connect to our body in a more direct and personal way.
+    image: https://plopes.org/project-thumbnails/UIST2023-MMS.jpg
+    tags: [Neuro]
+    paper: /path/to/paper.pdf
+    video: https://youtube.com/watch?v=video-id
+    project: /path/to/project
