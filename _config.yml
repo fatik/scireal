@@ -5,7 +5,7 @@ affiliation: Lead of the Human Computer Integration Lab in the Department of Com
 previous_position: PhD student with Prof. Patrick Baudisch at Hasso Plattner Institute
 thesis_link: You can read my PhD thesis here (Best Dissertation Award, University of Potsdam.)
 profile_image: https://lexfridman.com/wordpress/wp-content/uploads/2019/03/lex_fridman_deep_learning_course.jpg
-vision: |
+intro: |
   In my lab, we engineer interactive devices that integrate directly with the user's
   body. These devices are the natural succession to wearable interfaces and are
   designed to investigate how interfaces will connect to our body in a more
@@ -21,6 +21,7 @@ vision: |
   the user's body. Recently, we were able to generalize this concept to new
   modalities, including novel ways to interface with a user's sense of
   temperature, smell and rich-touch sensations.
+intro_video: https://www.youtube.com/watch?v=khRJMiquAjA
 google_scholar: https://scholar.google.com/citations?user=your-id
 publication_tags:
   - HCI
@@ -36,7 +37,7 @@ publications:
     video: https://youtube.com/watch?v=video-id
     project: /path/to/project
   # Add more publications as needed
-  
+
   - title: Interactive Benefits from Switching Electrical to Magnetic Muscle Stimulation
     description: In my lab, we engineer interactive devices that integrate directly with the user's body. These devices are the natural succession to wearable interfaces and are designed to investigate how interfaces will connect to our body in a more direct and personal way.
     image: https://plopes.org/project-thumbnails/UIST2023-MMS.jpg
