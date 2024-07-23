@@ -183,18 +183,46 @@
             flex: 0 0 50%;
             max-width: 50%;
         }
-        .video-wrapper {
+        .video-container {
             position: relative;
+            width: 100%;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
         }
-        .video-wrapper iframe {
+        .video-thumbnail {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 14%;
+            cursor: pointer;
+        }
+        .video-play-button:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-left: 20px solid white;
+            border-bottom: 10px solid transparent;
+        }
+        .video-play-button:hover {
+            background-color: red;
         }
         @media (max-width: 768px) {
             .profile {
@@ -251,8 +279,10 @@
             </div>
             {% if site.intro_video %}
             <div class="intro-video">
-                <div class="video-wrapper">
-                    <iframe src="{{ site.intro_video }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-container">
+                    <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/{{ site.intro_video }}/0.jpg');">
+                        <div class="video-play-button"></div>
+                    </div>
                 </div>
             </div>
             {% endif %}
@@ -313,6 +343,32 @@
                     pub.style.display = 'none';
                 }
             });
+        }
+
+        // Video functionality
+        const videoContainer = document.querySelector('.video-container');
+        const videoThumbnail = document.querySelector('.video-thumbnail');
+        const playButton = document.querySelector('.video-play-button');
+
+        if (videoThumbnail && playButton) {
+            videoThumbnail.addEventListener('click', loadVideo);
+            playButton.addEventListener('click', loadVideo);
+        }
+
+        function loadVideo(e) {
+            e.stopPropagation();
+            const videoId = '{{ site.intro_video }}';
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('allow', 'autoplay');
+            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&autoplay=1`);
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            videoContainer.innerHTML = '';
+            videoContainer.appendChild(iframe);
         }
     </script>
 </body>
