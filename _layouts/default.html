@@ -237,6 +237,14 @@
         .video-play-button:hover {
             background-color: red;
         }
+        .read-more {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -281,10 +289,9 @@
     <header>
         <nav class="navbar">
             <div class="nav-links">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-                <a href="#">Link 4</a>
+                {% for link in site.nav_links %}
+                    <a href="{{ link.url }}">{{ link.name }}</a>
+                {% endfor %}
             </div>
             <div class="hamburger">
                 <span></span>
@@ -292,10 +299,18 @@
                 <span></span>
             </div>
             <div class="social-links">
-                <a href="#"><i data-feather="twitter"></i></a>
-                <a href="#"><i data-feather="linkedin"></i></a>
-                <a href="#"><i data-feather="github"></i></a>
-                <a href="#"><i data-feather="mail"></i></a>
+                {% if site.social_links.twitter %}
+                    <a href="{{ site.social_links.twitter }}"><i data-feather="twitter"></i></a>
+                {% endif %}
+                {% if site.social_links.linkedin %}
+                    <a href="{{ site.social_links.linkedin }}"><i data-feather="linkedin"></i></a>
+                {% endif %}
+                {% if site.social_links.github %}
+                    <a href="{{ site.social_links.github }}"><i data-feather="github"></i></a>
+                {% endif %}
+                {% if site.social_links.email %}
+                    <a href="{{ site.social_links.email }}"><i data-feather="mail"></i></a>
+                {% endif %}
             </div>
         </nav>
     </header>
@@ -312,7 +327,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section id="about" class="section">
         <h2>{{ site.intro_title }}</h2>
         <div class="intro-container">
             <div class="intro-content">
@@ -326,99 +341,4 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
-        </div>
-    </section>
-
-    <section class="section">
-        <h2>
-            Research & Publications
-            <a href="{{ site.google_scholar }}" class="google-scholar">
-                <i data-feather="external-link" style="height: 18px;"></i> Google scholar link
-            </a>
-        </h2>
-        <div class="tags">
-            {% for tag in site.publication_tags %}
-                <span class="tag" data-tag="{{ tag }}">{{ tag }}</span>
-            {% endfor %}
-        </div>
-        <div class="publications">
-            {% for pub in site.publications %}
-                <div class="publication" data-tags="{{ pub.tags | join: ',' }}">
-                    <img src="{{ pub.image }}" alt="{{ pub.title }}">
-                    <div class="publication-content">
-                        <h3>{{ forloop.index }}. {{ pub.title }}</h3>
-                        <p>{{ pub.description }}</p>
-                        <div class="publication-links">
-                            {% if pub.paper %}<a href="{{ pub.paper }}"><i data-feather="file-text" class="icon"></i> Paper</a>{% endif %}
-                            {% if pub.video %}<a href="{{ pub.video }}"><i data-feather="video" class="icon"></i> Video</a>{% endif %}
-                            {% if pub.project %}<a href="{{ pub.project }}"><i data-feather="code" class="icon"></i> Project</a>{% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-    <script>
-        feather.replace();
-
-        const tags = document.querySelectorAll('.tag');
-        const publications = document.querySelectorAll('.publication');
-
-        tags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                tag.classList.toggle('active');
-                filterPublications();
-            });
-        });
-
-        function filterPublications() {
-            const activeTags = Array.from(tags).filter(tag => tag.classList.contains('active')).map(tag => tag.dataset.tag);
-
-            publications.forEach(pub => {
-                const pubTags = pub.dataset.tags.split(',');
-                if (activeTags.length === 0 || activeTags.some(tag => pubTags.includes(tag))) {
-                    pub.style.display = '';
-                } else {
-                    pub.style.display = 'none';
-                }
-            });
-        }
-
-        // Video functionality
-        const videoContainer = document.querySelector('.video-container');
-        const videoThumbnail = document.querySelector('.video-thumbnail');
-        const playButton = document.querySelector('.video-play-button');
-
-        if (videoThumbnail && playButton) {
-            videoThumbnail.addEventListener('click', loadVideo);
-            playButton.addEventListener('click', loadVideo);
-        }
-
-        function loadVideo(e) {
-            e.stopPropagation();
-            const videoId = '{{ site.intro_video }}';
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.setAttribute('allow', 'autoplay');
-            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&autoplay=1`);
-            iframe.style.position = 'absolute';
-            iframe.style.top = '0';
-            iframe.style.left = '0';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            videoContainer.innerHTML = '';
-            videoContainer.appendChild(iframe);
-        }
-
-        // Hamburger menu functionality
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
-</body>
-</html>
+            {% endif
