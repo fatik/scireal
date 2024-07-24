@@ -238,9 +238,9 @@
             background-color: red;
         }
         .read-more {
-            color: var(--primary-color);
+            color: var(--icon-accent);
             cursor: pointer;
-            font-weight: bold;
+            font-weight: medium;
         }
         .read-more:hover {
             text-decoration: underline;
@@ -364,7 +364,7 @@
                     <div class="publication-content">
                         <h3>{{ forloop.index }}. {{ pub.title }}</h3>
                         <p class="description">
-                            {{ pub.description | truncatewords: 50, "..." }}
+                            {{ pub.description | truncatewords: 27, "..." }}
                             {% if pub.description.size > 350 %}
                                 <span class="read-more">Read more</span>
                             {% endif %}
