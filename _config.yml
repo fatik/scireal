@@ -3,12 +3,11 @@ pronunciation: Sheh-zaad Rasool
 position: Assistant Professor
 affiliation: School of Interdisciplinary Engineering and Sciences (SINES)
 previous_position: Fraunhofer IDM @ NTU, Singapore.
-
 thesis_link: Research Fellow at Visual Immersive Haptic Mathematics (VIHAMAT) Lab.
 profile_image: https://fatikowais.com/scireal/pic/dp.png
 intro_title: About
 intro: |
-Dr. Shahzad Rasool is an Assistant Professor at School of Interdisciplinary Engineering and Sciences (SINES), National University of Science and Technology (NUST) since August 2016. He received his Ph.D. from Nanyang Technological University (NTU), Singapore in 2014, M.Sc. degree in Communication Engineering from Technische Universität München (TUM), Germany in 2009 and B.Sc. in Electrical Engineering from University of Engineering and Technology (UET), Taxila, Pakistan in 2006. In 2008, he worked as a research intern at DOCOMO Communications Laboratories Europe, Munich. From 2014-2016, he worked as a Research Fellow at the Immersive Mathematics Lab of Fraunhofer IDM @ NTU, Singapore. The recent focus of his research is on applications of immersive interaction and his research interests include haptics, virtual reality, HCI and computer vision.
+  Dr. Shahzad Rasool is an Assistant Professor at School of Interdisciplinary Engineering and Sciences (SINES), National University of Science and Technology (NUST) since August 2016. He received his Ph.D. from Nanyang Technological University (NTU), Singapore in 2014, M.Sc. degree in Communication Engineering from Technische Universität München (TUM), Germany in 2009 and B.Sc. in Electrical Engineering from University of Engineering and Technology (UET), Taxila, Pakistan in 2006. In 2008, he worked as a research intern at DOCOMO Communications Laboratories Europe, Munich. From 2014-2016, he worked as a Research Fellow at the Immersive Mathematics Lab of Fraunhofer IDM @ NTU, Singapore. The recent focus of his research is on applications of immersive interaction and his research interests include haptics, virtual reality, HCI and computer vision.
 intro_video: _ioc6sdgugo
 google_scholar: https://scholar.google.com/citations?view_op=list_works&hl=en&hl=en&user=ERuoo-UAAAAJ
 publication_tags:
@@ -24,8 +23,6 @@ publications:
     paper: /path/to/paper.pdf
     video: https://youtube.com/watch?v=video-id
     project: /path/to/project
-  # Add more publications as needed
-
   - title: Image-driven virtual simulation of arthroscopy
     description: In recent years, minimally invasive arthroscopic surgery has replaced a number of conventional open orthopedic surgery procedures on joints. While this achieves a number of advantages for the patient, the surgeons have to learn very different skills, since the surgery is performed with special miniature pencil-like tools and cameras inserted through little incisions while observing the surgical field on video monitor.
     image: https://s3.amazonaws.com/arthrex-video/videos/uAAzLcc8cU2xtgF14eTZYQ/thumbnails/uAAzLcc8cU2xtgF14eTZYQ_0.75_1920.jpg
