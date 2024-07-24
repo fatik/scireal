@@ -32,6 +32,44 @@
             align-items: center;
             margin-bottom: 40px;
         }
+        .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-color);
+        margin: 2px 0;
+    }
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-links.active {
+            display: flex;
+        }
+        .hamburger {
+            display: flex;
+        }
         nav {
             display: flex;
             gap: 20px;
@@ -250,19 +288,26 @@
 </head>
 <body>
     <header>
-        <nav>
+    <nav class="navbar">
+        <div class="nav-links">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
             <a href="#">Link 4</a>
-        </nav>
-        <nav>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="social-links">
             <a href="#"><i data-feather="twitter"></i></a>
             <a href="#"><i data-feather="linkedin"></i></a>
             <a href="#"><i data-feather="github"></i></a>
             <a href="#"><i data-feather="mail"></i></a>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
     <section class="profile">
         <img src="{{ site.profile_image }}" alt="{{ site.title }}">
@@ -375,6 +420,13 @@
             videoContainer.innerHTML = '';
             videoContainer.appendChild(iframe);
         }
+
+        const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
     </script>
 </body>
 </html>
