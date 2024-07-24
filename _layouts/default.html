@@ -39,10 +39,10 @@
             gap: 20px;
         }
         .nav-links a, .social-links a {
-            color: var(--icon-accent);
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9em;
-            gap: 4px;
+            
         }
         .hamburger {
             display: none;
@@ -365,7 +365,7 @@
                     <div class="publication-content">
                         <h3>{{ forloop.index }}. {{ pub.title }}</h3>
                         <p class="description">
-                            {{ pub.description | truncatelines: 4, "..." }}
+                            {{ pub.description | truncatewords: 27, "..." }}
                             {% if pub.description.size > 350 %}
                                 <span class="read-more">Read more</span>
                             {% endif %}
