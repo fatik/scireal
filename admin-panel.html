@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: var(--light-color);
+            border: none;
+            cursor: pointer;
+        }
+        .tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        h2 {
+            color: var(--primary-color);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="url"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .publication {
+            border: 1px solid var(--secondary-color);
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .delete-pub {
+            background-color: var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    
+    <div class="tab-container">
+        <button class="tab active" onclick="openTab(event, 'general')">General</button>
+        <button class="tab" onclick="openTab(event, 'intro')">Intro</button>
+        <button class="tab" onclick="openTab(event, 'links')">Links</button>
+        <button class="tab" onclick="openTab(event, 'publications')">Publications</button>
+    </div>
+
+    <div id="general" class="tab-content active">
+        <h2>General Information</h2>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+        
+        <label for="pronunciation">Pronunciation:</label>
+        <input type="text" id="pronunciation" name="pronunciation">
+        
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position">
+        
+        <label for="affiliation">Affiliation:</label>
+        <input type="text" id="affiliation" name="affiliation">
+        
+        <label for="previous_position">Previous Position:</label>
+        <input type="text" id="previous_position" name="previous_position">
+        
+        <label for="thesis_link">Thesis Link:</label>
+        <input type="text" id="thesis_link" name="thesis_link">
+        
+        <label for="profile_image">Profile Image URL:</label>
+        <input type="url" id="profile_image" name="profile_image">
+    </div>
+
+    <div id="intro" class="tab-content">
+        <h2>Introduction</h2>
+        <label for="intro_title">Intro Title:</label>
+        <input type="text" id="intro_title" name="intro_title">
+        
+        <label for="intro">Intro Text:</label>
+        <textarea id="intro" name="intro" rows="10"></textarea>
+        
+        <label for="intro_video">Intro Video ID:</label>
+        <input type="text" id="intro_video" name="intro_video">
+    </div>
+
+    <div id="links" class="tab-content">
+        <h2>Navigation Links</h2>
+        <div id="nav-links">
+            <!-- Nav links will be dynamically added here -->
+        </div>
+        <button onclick="addNavLink()">Add Nav Link</button>
+
+        <h2>Social Links</h2>
+        <label for="twitter">Twitter:</label>
+        <input type="url" id="twitter" name="twitter">
+        
+        <label for="linkedin">LinkedIn:</label>
+        <input type="url" id="linkedin" name="linkedin">
+        
+        <label for="github">GitHub:</label>
+        <input type="url" id="github" name="github">
+        
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+    </div>
+
+    <div id="publications" class="tab-content">
+        <h2>Publications</h2>
+        <div id="publications-list">
+            <!-- Publications will be dynamically added here -->
+        </div>
+        <button onclick="addPublication()">Add Publication</button>
+    </div>
+
+    <button onclick="saveChanges()">Save All Changes</button>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function addNavLink() {
+            const navLinksDiv = document.getElementById('nav-links');
+            const linkNumber = navLinksDiv.children.length / 2 + 1;
+            
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.placeholder = `Nav Link ${linkNumber} Name`;
+            nameInput.name = `nav_link_name_${linkNumber}`;
+            
+            const urlInput = document.createElement('input');
+            urlInput.type = 'url';
+            urlInput.placeholder = `Nav Link ${linkNumber} URL`;
+            urlInput.name = `nav_link_url_${linkNumber}`;
+            
+            navLinksDiv.appendChild(nameInput);
+            navLinksDiv.appendChild(urlInput);
+        }
+
+        function addPublication() {
+            const pubList = document.getElementById('publications-list');
+            const pubNumber = pubList.children.length + 1;
+            
+            const pubDiv = document.createElement('div');
+            pubDiv.className = 'publication';
+            pubDiv.innerHTML = `
+                <h3>Publication ${pubNumber}</h3>
+                <label>Title: <input type="text" name="pub_title_${pubNumber}"></label>
+                <label>Description: <textarea name="pub_description_${pubNumber}"></textarea></label>
+                <label>Image URL: <input type="url" name="pub_image_${pubNumber}"></label>
+                <label>Tags (comma-separated): <input type="text" name="pub_tags_${pubNumber}"></label>
+                <label>Paper Link: <input type="url" name="pub_paper_${pubNumber}"></label>
+                <label>Video Link: <input type="url" name="pub_video_${pubNumber}"></label>
+                <label>Project Link: <input type="url" name="pub_project_${pubNumber}"></label>
+                <button class="delete-pub" onclick="deletePublication(this)">Delete</button>
+            `;
+            
+            pubList.appendChild(pubDiv);
+        }
+
+        function deletePublication(button) {
+            button.parentElement.remove();
+        }
+
+        function saveChanges() {
+            // In a real application, this function would send the data to a server
+            // to update the _config.yml file. For this example, we'll just log the data.
+            console.log("Changes saved (not really, this is just a demo)");
+            alert("Changes saved (not really, this is just a demo)");
+        }
+
+        // Initialize with some data
+        addNavLink();
+        addPublication();
+
+        feather.replace();
+    </script>
+</body>
+</html>
